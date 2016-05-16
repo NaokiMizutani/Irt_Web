@@ -38,3 +38,32 @@ jinja2 を用いたテンプレート操作のサンプルプログラム
   * sample2.py : テンプレート template.html の中に生成したデータを流し込むプログラムで、
 mod_wsgi を利用する Webプログラムとなっている。
 ブラウザでアクセスすると、Highcharts を利用した Javascriptによるグラフ表示が行われる。
+
+### sample_irtR
+
+pypeR を用いて IRT 分析を python から実行するプログラム
+
+分析対象のデータファイルとして、プログラムと同じフォルダに irt_sample.csv をおいて実行すると、
+IRT- 2パラメータロジスティックモデルによる分析結果としての2つのパラメータをデータ系列ごとに
+列挙表示する。
+
+IRTの分析は、R の ltm モジュールを用いる。
+R は python プログラムから pypeR を用いて駆動し、分析結果として R が出力したテキストを 
+re(正規表現)モジュールを用いたパターンマッチングによって 2つのパラメータ (Dffclt, Dscrmn) を 
+抜き出して表示する内容である。
+
+なお、事前に R コンソールにて、 install.packages("ltm") を実行し、パッケージをダウンロード
+しておく必要がある。
+
+R 単独のテストとして、下記を R コンソールにて試して確認できれば、
+後の異常動作は python 側と考えられる。
+{% highlight text %}
+data <- read.table("cripboard", header=T)
+    or
+data <- read.csv('irt_sample.csv', header=T)
+descript(data)
+model2 <- ltm(data~z1)
+plot(model2)
+model2
+{% endhighlight %}
+
