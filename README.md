@@ -57,13 +57,13 @@ re(正規表現)モジュールを用いたパターンマッチングによっ�
 
 R 単独のテストとして、下記を R コンソールにて試して確認できれば、
 後の異常動作は python 側と考えられる。
-{% highlight text %}
-data <- read.table("cripboard", header=T)
-    or
-data <- read.csv('irt_sample.csv', header=T)
-descript(data)
-model2 <- ltm(data~z1)
-plot(model2)
-model2
-{% endhighlight %}
+    data <- read.table("cripboard", header=T)
+        or
+    data <- read.csv('irt_sample.csv', header=T)
+    descript(data)
+    model2 <- ltm(data~z1)
+    plot(model2)
+    model2
+
+
 
