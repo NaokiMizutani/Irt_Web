@@ -1,0 +1,3 @@
+----- This is a test. -----
+{% for data in datadict %}{{ loop.index }}: {{ data.year_w }} ({{ data.year_j }}) ： {{ data.eto }} ({{ data.eto_yomi }})
+{% endfor %}----- The test Ended. -----
