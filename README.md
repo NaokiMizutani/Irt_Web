@@ -28,3 +28,13 @@
 
 HTML の FORMタグからの input および upload に対する処理を
 python で書いた例を示す。
+
+### sample_jinja2
+
+jinja2 を用いたテンプレート操作のサンプルプログラム
+
+  * sample1.py : テンプレート template.txt, データ data.csv の2つのファイルを用いて、
+テンプレート部分にデータの内容を流し込んで、その結果を出力するプログラム  
+  * sample2.py : テンプレート template.html の中に生成したデータを流し込むプログラムで、
+mod_wsgi を利用する Webプログラムとなっている。
+ブラウザでアクセスすると、Highcharts を利用した Javascriptによるグラフ表示が行われる。
