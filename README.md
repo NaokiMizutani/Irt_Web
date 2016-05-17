@@ -36,7 +36,7 @@ __call__() : ファイル最終行で application = Irt_Web() とあり、イン
 サイトがアクセスされると、mod_wsgi では application() 関数が呼び出される。
 ファイルがアップロードされると、その内容は /tmp/tmp.txt に一旦保存される。
 保存後、irt_analysis() および graphhtml() が順に呼び出され、その結果の html テキストを
-発信する。
+発信する。  
 （参考プログラム sample_form フォルダ）
 
 irt_analysis() : pypeR を用いて R を駆動し、IRT の分析を行って、その結果サマリーおよび
@@ -44,7 +44,7 @@ irt_analysis() : pypeR を用いて R を駆動し、IRT の分析を行って�
 R で行う作業は、/tmp/tmp.txt の内容を読み込み、ltm にて分析することである。
 R から返される結果文字列のうち結果サマリーはそのまま利用する。
 また、分析結果としてのパラメータ値は re モジュールを使ってパターンマッチングによって
-数値として、項目名は文字列として入手する。
+数値として、項目名は文字列として入手する。  
 （参考プログラム sample_irtR フォルダ）
 
 graphhtml() : 結果をブラウザに表示するために、 template.html をテンプレートとし 
@@ -52,6 +52,8 @@ jinja2 モジュールを使って必要なデータを流し込んで html テ�
 template.html では、表示画面構成として画面を大きく左右に2分割し、左側に R が出力する
 結果サマリーをそのまま表示し、右側には R からの2パラメータの値による ICCグラフを
 Javascriptグラフライブラリ Highcharts を利用して描く。
+画面の分割は css で行っており、サマリーの表示は <pre><code> タグを利用した。
+参考： http://www.geocities.jp/eijispace/2012/0419.html  
 （参考プログラム sample_jinja2 フォルダ）
 
 ## ファイルのアップロードから R での IRT 分析までの動作確認（main_A.py）
