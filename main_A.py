@@ -15,7 +15,7 @@ html_get = '''<head>
 </head>
 <body>
 <h1>ファイル・アップロード操作画面</h1>
-<form action="http://localhost/main.py" method="post" enctype="multipart/form-data">
+<form action="./main_A.py" method="post" enctype="multipart/form-data">
 --- Select File and Push Upload-Button --- <br /><br />
 <input type="file" name="upfile" size="50" /><br /><br />
 <input type="submit" value=" Upload " />
@@ -60,7 +60,7 @@ class Irt_Web(object):
     def irt_analysis(self):
         r = pr.R()
         r("data <- read.csv('/tmp/tmp.txt', header=T)")
-        r("write.csv(data, '/tmp/tmp2.txt', quote=FALSE, row.names=FALSE)")
+#        r("write.csv(data, '/tmp/tmp2.txt', quote=FALSE, row.names=FALSE)")
 #        text = r("require('ltm')")
         r("require('ltm')")
         r("model2 <- ltm(data~z1)")
@@ -73,16 +73,14 @@ class Irt_Web(object):
         
         mode = 0
         for line in lines:
-          if mode == 0:
-            m = re.search('Dffclt\s+Dscrmn', line)
-            if m:
-              mode = 1
-              print('\n' + 'Name   ' + m.group())
-          elif mode == 1:
-            m = re.search('(?P<Name>[\w\.]+)\s+(?P<Dffclt>\-*[0-9]*\.*[0-9]*)\s+(?P<Dscrmn>[0-9]*\.*[0-9]*)\s*', line)
-            if m:
-              print(m.group('Name') + ' --- ' + m.group('Dffclt') + ' --- ' + m.group('Dscrmn'))
-              data.append({'Name': m.group('Name'), 'Dffclt': float(m.group('Dffclt')), 'Dscrmn': float(m.group('Dscrmn'))})
+            if mode == 0:
+                m = re.search('Dffclt\s+Dscrmn', line)
+                if m:
+                    mode = 1
+            elif mode == 1:
+                m = re.search('(?P<Name>[\w\.]+)\s+(?P<Dffclt>\-*[0-9]*\.*[0-9]*)\s+(?P<Dscrmn>[0-9]*\.*[0-9]*)\s*', line)
+                if m:
+                    data.append({'Name': m.group('Name'), 'Dffclt': float(m.group('Dffclt')), 'Dscrmn': float(m.group('Dscrmn'))})
         
         return(str(data))
 
