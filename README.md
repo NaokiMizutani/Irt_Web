@@ -31,7 +31,7 @@ IRT の2パラメータロジスティックモデルにて分析を行い、そ
 同一ディレクトリに template.html ファイルが必要である。
 また、アップロードするファイルの例として irt_sample.csv を載せておく。
 
-__call__() : ファイル最終行で application = Irt_Web() とあり、インスタンスを application に
+\_\_call\_\_() : ファイル最終行で application = Irt_Web() とあり、インスタンスを application に
 設定して、それが関数として機能するようにするために特殊メソッドとして作る必要がある。
 サイトがアクセスされると、mod_wsgi では application() 関数が呼び出される。
 ファイルがアップロードされると、その内容は /tmp/tmp.txt に一旦保存される。
@@ -53,7 +53,7 @@ template.html では、表示画面構成として画面を大きく左右に2�
 結果サマリーをそのまま表示し、右側には R からの2パラメータの値による ICCグラフを
 Javascriptグラフライブラリ Highcharts を利用して描く。
 画面の分割は css で行っており、サマリーの表示は \<pre>\<code> タグを利用した。
-参考： http://www.geocities.jp/eijispace/2012/0419.html  
+cssによる分割についてのサイト： http://www.geocities.jp/eijispace/2012/0419.html  
 （参考プログラム sample_jinja2 フォルダ）
 
 ## ファイルのアップロードから R での IRT 分析までの動作確認（main_A.py）
