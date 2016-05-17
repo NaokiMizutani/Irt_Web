@@ -52,7 +52,7 @@ jinja2 モジュールを使って必要なデータを流し込んで html テ�
 template.html では、表示画面構成として画面を大きく左右に2分割し、左側に R が出力する
 結果サマリーをそのまま表示し、右側には R からの2パラメータの値による ICCグラフを
 Javascriptグラフライブラリ Highcharts を利用して描く。
-画面の分割は css で行っており、サマリーの表示は \<pre><code> タグを利用した。
+画面の分割は css で行っており、サマリーの表示は \<pre>\<code> タグを利用した。
 参考： http://www.geocities.jp/eijispace/2012/0419.html  
 （参考プログラム sample_jinja2 フォルダ）
 
