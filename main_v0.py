@@ -100,7 +100,7 @@ class Irt_Web(object):
             val_b = case[1]
             insert_text += tab*2 + "{\n"
             insert_text += tab*3 + "name: '{0}: ({1:5.3f}, {2:5.3f})',\n".format(case[0], val_a, val_b)
-            insert_text += tab*3 + selection_color[n]
+            insert_text += tab*3 + selection_color[n%10]
             insert_text += tab*3 + "data: [\n"
             for ntheta in range(-40, 41, 1):
                 val_theta = ntheta / 10.0
