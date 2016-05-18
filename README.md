@@ -13,13 +13,13 @@
 できそうである。  
     + form を用いて、表として表示したチェックボックスつきデータから分析用データを作成  
 [pypeR, pandas?]
+[re のパターンマッチングを用いて、R の結果から必要データを抽出]
 
 3 IRT パッケージで求めたパラメータの数値を用いて ICC（項目特性曲線）のグラフを描く。  
   - Javascript 系のグラフツールを活用する  
   [Highcharts の利用]  
   - R が出力する summary情報をあわせて表示する  
   [jinja2 テンプレート活用]  
-    [re のパターンマッチングを用いて、R の結果から必要データを抽出]
 
 ## 全体の動作確認 (main_v0.py) ##
 
@@ -80,6 +80,35 @@ library() 関数を呼ぶと、第一にユーザーホームのライブラリ�
 他の方法としては、root で R を動かして必要なライブラリをインストールすることが考えられる。
 root のホーム下にインストールされることになりそうであるが、一つの解決方法である。
 動くかどうかは未確認である。
+
+
+## サーバーの R をリモートのブラウザから動作（main_B.py）
+
+ブラウザでアクセスすると R のコマンドプロンプトの１行に相当するテキストボックスが表示され、
+R のコマンドを入力すると実行結果が表示されるというサンプルプログラムである。
+
+ただし、mod_wsgi の設定に注意を要する。
+このプログラムの実行では、R のコマンド入力ごとにサイトが呼び出すことになるが、
+そのたびに Python のインスタンスが別オブジェクトとして新たに作られ、
+新規の R インスタンスが生成されて、前回までの環境とは異なる新規の R 実行環境になってしまう
+ことを経験した。
+
+その回避策として、wsgi をデーモンモードで動作させてプロセスを制限する方法を採用した。
+これは /etc/httpd/conf.d/mod_wsgi.conf を次のように修正することで設定できる。
+
+    <Directory "/var/www/html/">
+        AddHandler wsgi-script .wsgi
+        AddHandler wsgi-script .py
+    </Directory>
+
+    WSGISocketPrefix /var/run/wsgi
+    WSGIDaemonProcess myapp-process user=apache group=apache 
+    <Location />
+        WSGIProcessGroup myapp-process
+    </Location>
+
+なお、この main_B.py については、インスタンス変数の使い方に改善の余地があると感じている。
+今後の課題である。
 
     
     
