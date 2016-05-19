@@ -26,21 +26,20 @@ html = '''<?xml version="1.0" encoding="utf-8"?>
 class R_Web(object):
 
     def __init__(self):
-        self.R = pr.R()
+        self.R = None
         self.data = ''
+        pass
 
     def __call__(self, environ, start_response):
         method = environ.get('REQUEST_METHOD')
         if method == "GET":
+            self.R = pr.R()
+            self.data = ''
             output = html.format(self.data)
         elif method == "POST":
             form = cgi.FieldStorage(environ['wsgi.input'], environ=environ, keep_blank_values=True)
             command = form['text'].value
-            if command == 'reset' or command == 'RESET':
-                self.R = pr.R()
-                self.data = ''
-                command = "sessionInfo()"
-            self.data += '> ' + command + '\n'
+#            self.data += '> ' + command + '\n'
             self.data += self.R(command)
 #            self.data += 'ObjectID of self : ' + str(id(self)) + '\n'
 
