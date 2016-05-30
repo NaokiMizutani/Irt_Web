@@ -38,6 +38,7 @@ shinyServer(function(input, output) {
       plot.ltm(v$data, type="ICC", col=color)
     })
   })
+  
   observeEvent(input$file1, {
     output$distPlot <- renderPlot({
       inFile <- input$file1
